@@ -265,6 +265,9 @@ h1 {
   background: #fbfcf6;
   box-shadow: 0 5px 0 #dbe7d0;
   cursor: grab;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
   transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
 }
 
@@ -293,6 +296,11 @@ h1 {
   cursor: default;
   opacity: 0.38;
   filter: grayscale(0.25);
+}
+
+.organism-card.is-touch-dragging {
+  opacity: 0.45;
+  transform: scale(0.97);
 }
 
 .organism-card__photo {
@@ -603,6 +611,37 @@ h1 {
   background: #2f724a;
 }
 
+.touch-drag-preview {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  width: min(210px, 42vw);
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px 7px 7px;
+  border: 2px solid #ffcb05;
+  border-radius: 999px;
+  color: #173c2b;
+  background: rgba(255, 255, 247, 0.96);
+  box-shadow: 0 14px 38px rgba(10, 39, 24, 0.35);
+  font-size: 0.78rem;
+  font-weight: 850;
+  line-height: 1.15;
+  pointer-events: none;
+  transform: translate(-50%, -118%);
+  will-change: left, top;
+  backdrop-filter: blur(6px);
+}
+
+.touch-drag-preview img {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border: 2px solid #d8efa7;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 footer {
   display: flex;
   width: min(1480px, calc(100% - 40px));
@@ -791,5 +830,11 @@ footer p {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .organism-card {
+    transition-duration: 70ms;
   }
 }

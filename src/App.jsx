@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import batImage from './assets/lesser-dog-faced-fruit-bat.png'
 import beeImage from './assets/broad-handed-carpenter-bee.png'
 import bulbulImage from './assets/olive-winged-bulbul.png'
@@ -81,6 +81,7 @@ function App() {
   const [placed, setPlaced] = useState([])
   const [selectedId, setSelectedId] = useState(null)
   const [draggingId, setDraggingId] = useState(null)
+  const [touchDrag, setTouchDrag] = useState(null)
   const [hoveredSlot, setHoveredSlot] = useState(null)
   const [wrongSlot, setWrongSlot] = useState(null)
   const [status, setStatus] = useState({
@@ -88,6 +89,8 @@ function App() {
     message: 'Select an organism to begin.',
   })
   const [hintVisible, setHintVisible] = useState(false)
+  const touchDragRef = useRef(null)
+  const ignoreNextClickRef = useRef(null)
 
   const byId = useMemo(
     () => Object.fromEntries(organisms.map((organism) => [organism.id, organism])),
@@ -123,6 +126,10 @@ function App() {
   }
 
   function handleCardClick(id) {
+    if (ignoreNextClickRef.current === id) {
+      ignoreNextClickRef.current = null
+      return
+    }
     if (placed.includes(id)) return
     const nextId = selectedId === id ? null : id
     setSelectedId(nextId)
@@ -136,16 +143,110 @@ function App() {
   }
 
   function handleDragStart(event, id) {
+    if (touchDragRef.current?.id === id) {
+      event.preventDefault()
+      return
+    }
     event.dataTransfer.setData('text/plain', id)
     event.dataTransfer.effectAllowed = 'move'
     setDraggingId(id)
     setSelectedId(id)
   }
 
+  function selectCardImmediately(id) {
+    setSelectedId(id)
+    setHintVisible(false)
+    setStatus({
+      tone: 'neutral',
+      message: `${byId[id].name} selected. Now tap its circle or drag it into place.`,
+    })
+  }
+
+  function slotAtPoint(clientX, clientY) {
+    return document.elementFromPoint(clientX, clientY)?.closest('[data-drop-slot]')?.dataset.dropSlot ?? null
+  }
+
+  function handleTouchPointerDown(event, id) {
+    if ((event.pointerType !== 'touch' && event.pointerType !== 'pen') || placed.includes(id)) return
+
+    const interaction = {
+      id,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      clientX: event.clientX,
+      clientY: event.clientY,
+      active: false,
+      wasSelected: selectedId === id,
+    }
+    touchDragRef.current = interaction
+    ignoreNextClickRef.current = id
+    setTouchDrag(interaction)
+
+    if (!interaction.wasSelected) selectCardImmediately(id)
+    event.currentTarget.setPointerCapture?.(event.pointerId)
+  }
+
+  function handleTouchPointerMove(event) {
+    const interaction = touchDragRef.current
+    if (!interaction || interaction.pointerId !== event.pointerId) return
+
+    const distance = Math.hypot(
+      event.clientX - interaction.startX,
+      event.clientY - interaction.startY,
+    )
+    const nextInteraction = {
+      ...interaction,
+      clientX: event.clientX,
+      clientY: event.clientY,
+      active: interaction.active || distance >= 6,
+    }
+    touchDragRef.current = nextInteraction
+    setTouchDrag(nextInteraction)
+
+    if (nextInteraction.active) {
+      event.preventDefault()
+      setHoveredSlot(slotAtPoint(event.clientX, event.clientY))
+    }
+  }
+
+  function finishTouchPointer(event, cancelled = false) {
+    const interaction = touchDragRef.current
+    if (!interaction || interaction.pointerId !== event.pointerId) return
+
+    if (interaction.active && !cancelled) {
+      const slotId = slotAtPoint(event.clientX, event.clientY)
+      if (slotId) {
+        attemptPlacement(interaction.id, slotId)
+      } else {
+        setStatus({
+          tone: 'neutral',
+          message: `${byId[interaction.id].name} is still selected. Drag again or tap a circle.`,
+        })
+      }
+    } else if (!interaction.active && interaction.wasSelected && !cancelled) {
+      setSelectedId(null)
+      setHintVisible(false)
+      setStatus({
+        tone: 'neutral',
+        message: 'Selection cleared. Choose another card when you are ready.',
+      })
+    }
+
+    touchDragRef.current = null
+    setTouchDrag(null)
+    setHoveredSlot(null)
+    window.setTimeout(() => {
+      if (ignoreNextClickRef.current === interaction.id) ignoreNextClickRef.current = null
+    }, 750)
+  }
+
   function resetGame() {
     setPlaced([])
     setSelectedId(null)
     setDraggingId(null)
+    touchDragRef.current = null
+    setTouchDrag(null)
     setHoveredSlot(null)
     setWrongSlot(null)
     setHintVisible(false)
@@ -202,11 +303,15 @@ function App() {
                   <button
                     key={id}
                     type="button"
-                    className={`organism-card${isSelected ? ' is-selected' : ''}${isPlaced ? ' is-placed' : ''}`}
+                    className={`organism-card${isSelected ? ' is-selected' : ''}${isPlaced ? ' is-placed' : ''}${touchDrag?.active && touchDrag.id === id ? ' is-touch-dragging' : ''}`}
                     draggable={!isPlaced}
                     disabled={isPlaced}
                     aria-pressed={isSelected}
                     onClick={() => handleCardClick(id)}
+                    onPointerDown={(event) => handleTouchPointerDown(event, id)}
+                    onPointerMove={handleTouchPointerMove}
+                    onPointerUp={(event) => finishTouchPointer(event)}
+                    onPointerCancel={(event) => finishTouchPointer(event, true)}
                     onDragStart={(event) => handleDragStart(event, id)}
                     onDragEnd={() => {
                       setDraggingId(null)
@@ -277,6 +382,7 @@ function App() {
                         style={styleFromBox(organism.slot)}
                         aria-label={isFilled ? `${organism.name}, correctly placed` : `Empty answer circle${selected ? ` for ${selected.name}` : ''}`}
                         disabled={isFilled}
+                        data-drop-slot={isFilled ? undefined : organism.id}
                         onClick={() => attemptPlacement(selectedId, organism.id)}
                         onDragEnter={(event) => {
                           event.preventDefault()
@@ -325,6 +431,17 @@ function App() {
           </section>
         </div>
       </section>
+
+      {touchDrag?.active && (
+        <div
+          className="touch-drag-preview"
+          style={{ left: touchDrag.clientX, top: touchDrag.clientY }}
+          aria-hidden="true"
+        >
+          <img src={byId[touchDrag.id].image} alt="" />
+          <span>{byId[touchDrag.id].name}</span>
+        </div>
+      )}
 
       <footer>
         <p>Explore, observe, and protect the biodiversity of Kent Ridge Park.</p>
