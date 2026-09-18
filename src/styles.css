@@ -355,6 +355,10 @@ h1 {
   background: #f7f8f3;
 }
 
+.board-panel > .status-bar {
+  margin-bottom: 12px;
+}
+
 .status-bar__icon {
   display: grid;
   width: 28px;
@@ -420,6 +424,10 @@ h1 {
   border-radius: 4px 12px 12px 4px;
   color: #514718;
   background: #fff8d1;
+}
+
+.board-panel > .hint-card {
+  margin: -2px 0 12px;
 }
 
 .hint-card p {

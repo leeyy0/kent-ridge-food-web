@@ -223,6 +223,17 @@ function App() {
               })}
             </div>
 
+          </aside>
+
+          <section className="board-panel" aria-labelledby="board-title">
+            <div className="board-heading">
+              <div>
+                <span className="step-pill">Step 2</span>
+                <h2 id="board-title">Complete the food web</h2>
+                <p>Choose a card, then drag it—or tap a circle—to place it.</p>
+              </div>
+            </div>
+
             <div className={`status-bar status-bar--${status.tone}`} role="status" aria-live="polite">
               <span className="status-bar__icon" aria-hidden="true">
                 {status.tone === 'success' || status.tone === 'complete' ? '✓' : status.tone === 'error' ? '!' : 'i'}
@@ -244,16 +255,6 @@ function App() {
                 <p><strong>{selected.name}:</strong> {selected.clue}</p>
               </div>
             )}
-          </aside>
-
-          <section className="board-panel" aria-labelledby="board-title">
-            <div className="board-heading">
-              <div>
-                <span className="step-pill">Step 2</span>
-                <h2 id="board-title">Complete the food web</h2>
-                <p>Choose a card, then drag it—or tap a circle—to place it.</p>
-              </div>
-            </div>
 
             <div className="board-scroll" aria-label="Food web board">
               <div className={`food-web-board${complete ? ' is-complete' : ''}`}>
