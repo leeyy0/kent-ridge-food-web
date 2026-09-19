@@ -838,3 +838,897 @@ footer p {
     transition-duration: 70ms;
   }
 }
+
+/* Shared activity navigation */
+.hero__topline,
+.bird-hero__topline {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.activity-nav {
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid rgba(231, 248, 204, 0.2);
+  border-radius: 999px;
+  background: rgba(6, 30, 20, 0.28);
+  backdrop-filter: blur(10px);
+}
+
+.activity-nav a {
+  padding: 8px 15px;
+  border-radius: 999px;
+  color: rgba(248, 245, 233, 0.72);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: color 150ms ease, background 150ms ease;
+}
+
+.activity-nav a:hover {
+  color: #fff;
+}
+
+.activity-nav a.is-current {
+  color: #163c2a;
+  background: #ffda42;
+}
+
+.activity-nav a:focus-visible {
+  outline: 3px solid rgba(255, 218, 66, 0.65);
+  outline-offset: 3px;
+}
+
+/* Bird-sound matching activity */
+.bird-sounds-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 9% 30%, rgba(212, 232, 175, 0.48), transparent 25rem),
+    #f3f0e5;
+}
+
+.bird-hero {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  padding: 28px max(24px, calc((100vw - 1320px) / 2)) 98px;
+  color: #f8f5e9;
+  background:
+    radial-gradient(circle at 75% 0%, rgba(138, 177, 100, 0.22), transparent 33rem),
+    linear-gradient(125deg, #102e21 0%, #184c32 58%, #267047 100%);
+}
+
+.bird-hero::before {
+  position: absolute;
+  right: 12%;
+  bottom: -330px;
+  width: 700px;
+  height: 700px;
+  border: 1px solid rgba(221, 247, 180, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 72px rgba(221, 247, 180, 0.035), 0 0 0 144px rgba(221, 247, 180, 0.025);
+  content: '';
+}
+
+.bird-hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  max-width: 790px;
+  align-items: flex-end;
+  gap: 46px;
+  margin-top: 66px;
+}
+
+.bird-hero h1 {
+  max-width: 640px;
+  margin-bottom: 18px;
+  font-size: clamp(3.4rem, 7vw, 6.6rem);
+}
+
+.bird-hero__intro {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(248, 245, 233, 0.76);
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.6;
+}
+
+.bird-progress {
+  display: flex;
+  min-width: 190px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 5px;
+  padding: 16px 18px;
+  border: 1px solid rgba(234, 255, 204, 0.2);
+  border-radius: 18px;
+  background: rgba(7, 33, 22, 0.4);
+  box-shadow: 0 18px 50px rgba(4, 24, 15, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.bird-progress__icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 50%;
+  color: #183b29;
+  background: #ffda42;
+  font-size: 1.55rem;
+  font-weight: 900;
+}
+
+.bird-progress .progress-card__number {
+  font-size: 1.9rem;
+}
+
+.bird-progress .progress-card__label {
+  margin: 4px 0 0;
+}
+
+.bird-hero__portraits {
+  position: absolute;
+  z-index: 1;
+  right: max(24px, calc((100vw - 1460px) / 2));
+  bottom: 62px;
+  display: grid;
+  grid-template-columns: repeat(2, 138px);
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid rgba(232, 249, 205, 0.16);
+  border-radius: 34px;
+  background: rgba(8, 37, 24, 0.35);
+  box-shadow: 0 28px 80px rgba(4, 26, 16, 0.28);
+  transform: rotate(3deg);
+  backdrop-filter: blur(8px);
+}
+
+.bird-hero__portraits img {
+  width: 138px;
+  height: 110px;
+  border-radius: 22px;
+  object-fit: cover;
+}
+
+.bird-hero__portraits img:nth-child(2),
+.bird-hero__portraits img:nth-child(3) {
+  filter: saturate(0.88) brightness(0.9);
+}
+
+.bird-game {
+  position: relative;
+  z-index: 3;
+  width: min(1320px, calc(100% - 40px));
+  margin: -46px auto 0;
+  padding: 34px;
+  border: 1px solid rgba(25, 69, 47, 0.12);
+  border-radius: 28px;
+  background: rgba(255, 254, 248, 0.98);
+  box-shadow: 0 22px 80px rgba(34, 67, 46, 0.13);
+}
+
+.bird-game__heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.bird-game__heading h2 {
+  margin: 12px 0 6px;
+  color: #173c2b;
+  font-size: clamp(1.7rem, 3vw, 2.55rem);
+  letter-spacing: -0.04em;
+}
+
+.bird-game__heading p {
+  margin: 0;
+  color: #647269;
+}
+
+.bird-status {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  padding: 10px 14px;
+  border: 1px solid #dce3d8;
+  border-radius: 14px;
+  color: #44594b;
+  background: #f7f8f3;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.bird-status.status-bar--success,
+.bird-status.status-bar--complete {
+  border-color: #a7cea4;
+  color: #1f5a37;
+  background: #effbea;
+}
+
+.bird-status.status-bar--error {
+  border-color: #e9b3a6;
+  color: #853e2e;
+  background: #fff4ef;
+}
+
+.bird-game__layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.78fr) 54px minmax(500px, 1.5fr);
+  align-items: stretch;
+}
+
+.sound-bank,
+.bird-gallery {
+  min-width: 0;
+  padding: 26px;
+  border: 1px solid #dce4d8;
+  border-radius: 22px;
+  background: #f8f8f1;
+}
+
+.bird-gallery {
+  background: #f1f5e9;
+}
+
+.bird-section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.bird-section-label > span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border-radius: 50%;
+  color: #173c2b;
+  background: #ffda42;
+  font-size: 0.72rem;
+  font-weight: 950;
+}
+
+.bird-section-label h3 {
+  margin: 0 0 2px;
+  color: #173c2b;
+  font-size: 1.05rem;
+}
+
+.bird-section-label p {
+  margin: 0;
+  color: #758078;
+  font-size: 0.8rem;
+}
+
+.sound-list {
+  display: grid;
+  gap: 11px;
+}
+
+.sound-card {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 30px;
+  align-items: center;
+  gap: 12px;
+  min-height: 84px;
+  padding: 10px 11px;
+  border: 1px solid #d9e1d5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 5px 0 #dfe8d8;
+  cursor: grab;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, opacity 160ms ease;
+}
+
+.sound-card:hover:not(.is-matched) {
+  border-color: #8eae75;
+  box-shadow: 0 7px 0 #cde0bb, 0 14px 28px rgba(34, 78, 48, 0.1);
+  transform: translateY(-2px);
+}
+
+.sound-card.is-selected {
+  border-color: #e4b900;
+  background: #fffbea;
+  box-shadow: 0 6px 0 #ffcf21, 0 0 0 3px rgba(255, 207, 33, 0.13);
+}
+
+.sound-card.is-matched {
+  border-color: #a9cda6;
+  background: #f0faeb;
+  box-shadow: 0 4px 0 #c8ddc2;
+  cursor: default;
+}
+
+.sound-card.is-touch-dragging {
+  opacity: 0.42;
+  transform: scale(0.98);
+}
+
+.sound-card__play {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: #205f3d;
+  box-shadow: 0 5px 12px rgba(24, 77, 46, 0.22);
+  cursor: pointer;
+}
+
+.sound-card__play:hover,
+.sound-card__play.is-playing {
+  color: #173c2b;
+  background: #ffda42;
+}
+
+.sound-card__play span {
+  margin-left: 2px;
+  font-size: 0.82rem;
+}
+
+.sound-card__play.is-playing span {
+  margin-left: 0;
+  font-weight: 900;
+  letter-spacing: -0.16em;
+}
+
+.sound-card__select {
+  min-width: 0;
+  padding: 5px 0;
+  border: 0;
+  color: #1c402d;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sound-card__select:disabled {
+  cursor: default;
+}
+
+.sound-card__eyebrow,
+.sound-card__instruction {
+  display: block;
+  color: #89918a;
+  font-size: 0.66rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.sound-card__select strong {
+  display: block;
+  overflow: hidden;
+  margin: 3px 0 4px;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+}
+
+.sound-card__instruction {
+  color: #64806d;
+  font-size: 0.59rem;
+  letter-spacing: 0.04em;
+}
+
+.sound-card__handle {
+  display: grid;
+  width: 30px;
+  height: 40px;
+  place-items: center;
+  border-radius: 10px;
+  color: #64806d;
+  background: #edf2e9;
+  font-size: 0.8rem;
+  font-weight: 900;
+  cursor: grab;
+  touch-action: none;
+}
+
+.is-matched .sound-card__handle {
+  color: #fff;
+  background: #347a4e;
+}
+
+.bird-game__divider {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.bird-game__divider::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 1px dashed #b8c7b4;
+  content: '';
+}
+
+.bird-game__divider span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #d7e0d3;
+  border-radius: 50%;
+  color: #55715f;
+  background: #fffef8;
+  font-weight: 900;
+}
+
+.bird-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.bird-target {
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 17px;
+  color: #173c2b;
+  background: #fff;
+  box-shadow: 0 5px 0 #dce6d5;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.bird-target:hover:not(:disabled),
+.bird-target.is-hovered {
+  border-color: #ffcb05;
+  box-shadow: 0 7px 0 #ffcb05, 0 16px 30px rgba(37, 74, 48, 0.13);
+  transform: translateY(-3px);
+}
+
+.bird-target.is-matched {
+  border-color: #5c9b65;
+  box-shadow: 0 5px 0 #86b984;
+  cursor: default;
+}
+
+.bird-target.is-wrong {
+  border-color: #d9644c;
+  box-shadow: 0 5px 0 #d9644c;
+  animation: shake 420ms ease;
+}
+
+.bird-target__image {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 8.6;
+  overflow: hidden;
+  background: #dce7d8;
+}
+
+.bird-target__image::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 46%;
+  background: linear-gradient(transparent, rgba(5, 27, 15, 0.66));
+  content: '';
+  pointer-events: none;
+}
+
+.bird-target__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 350ms ease;
+}
+
+.bird-target:hover:not(:disabled) img {
+  transform: scale(1.035);
+}
+
+.bird-target__drop-prompt {
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  bottom: 9px;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(12, 45, 27, 0.56);
+  font-size: 0.6rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(7px);
+}
+
+.bird-target__check {
+  position: absolute;
+  z-index: 3;
+  top: 10px;
+  left: 10px;
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  background: #347a4e;
+  font-weight: 900;
+  animation: place-in 350ms ease both;
+}
+
+.bird-target__copy {
+  display: block;
+  padding: 11px 13px 13px;
+}
+
+.bird-target__copy strong,
+.bird-target__copy em {
+  display: block;
+}
+
+.bird-target__copy strong {
+  overflow: hidden;
+  font-size: 0.83rem;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bird-target__copy em {
+  overflow: hidden;
+  margin-top: 3px;
+  color: #7a857d;
+  font-size: 0.66rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bird-complete {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 24px;
+  padding: 17px 18px;
+  border: 2px solid #c8dfad;
+  border-radius: 18px;
+  color: #1b4c31;
+  background: linear-gradient(95deg, #edf9e8, #fbf8da);
+  animation: bird-complete-in 450ms ease both;
+}
+
+.bird-complete > span {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border-radius: 50%;
+  color: #183c29;
+  background: #ffda42;
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+.bird-complete div {
+  flex: 1;
+}
+
+.bird-complete strong {
+  font-size: 1rem;
+}
+
+.bird-complete p {
+  margin: 3px 0 0;
+  color: #55705e;
+  font-size: 0.82rem;
+}
+
+.bird-complete button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 11px;
+  color: #fff;
+  background: #245f3e;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.sound-drag-preview {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px 10px 10px;
+  border: 2px solid #ffcb05;
+  border-radius: 999px;
+  color: #173c2b;
+  background: rgba(255, 255, 247, 0.97);
+  box-shadow: 0 14px 38px rgba(10, 39, 24, 0.35);
+  font-size: 0.78rem;
+  font-weight: 850;
+  pointer-events: none;
+  transform: translate(-50%, -130%);
+  backdrop-filter: blur(6px);
+}
+
+.sound-drag-preview span {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffda42;
+  font-size: 1rem;
+}
+
+@keyframes bird-complete-in {
+  0% { opacity: 0; transform: translateY(10px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 1120px) {
+  .bird-hero__content {
+    max-width: 650px;
+  }
+
+  .bird-hero__portraits {
+    grid-template-columns: repeat(2, 108px);
+  }
+
+  .bird-hero__portraits img {
+    width: 108px;
+    height: 94px;
+  }
+
+  .bird-game__layout {
+    grid-template-columns: minmax(260px, 0.8fr) 42px minmax(420px, 1.4fr);
+  }
+
+  .sound-bank,
+  .bird-gallery {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .bird-hero {
+    min-height: auto;
+    padding-bottom: 92px;
+  }
+
+  .bird-hero__content {
+    display: block;
+    max-width: calc(100% - 190px);
+    margin-top: 52px;
+  }
+
+  .bird-progress {
+    width: fit-content;
+    margin-top: 26px;
+  }
+
+  .bird-hero__portraits {
+    right: 24px;
+    bottom: 82px;
+    grid-template-columns: 142px;
+  }
+
+  .bird-hero__portraits img {
+    display: none;
+    width: 142px;
+    height: 110px;
+  }
+
+  .bird-hero__portraits img:first-child,
+  .bird-hero__portraits img:nth-child(2) {
+    display: block;
+  }
+
+  .bird-game__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .bird-game__divider {
+    height: 54px;
+  }
+
+  .bird-game__divider::before {
+    top: 50%;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    border-top: 1px dashed #b8c7b4;
+    border-left: 0;
+  }
+
+  .bird-game__divider span {
+    transform: rotate(90deg);
+  }
+
+  .sound-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .hero__topline,
+  .bird-hero__topline {
+    align-items: flex-start;
+  }
+
+  .activity-nav a {
+    padding: 8px 10px;
+    font-size: 0.7rem;
+  }
+
+  .bird-hero {
+    padding: 20px 18px 82px;
+  }
+
+  .bird-hero__content {
+    max-width: 100%;
+    margin-top: 46px;
+  }
+
+  .bird-hero h1 {
+    max-width: 520px;
+    font-size: clamp(3.15rem, 15vw, 5rem);
+  }
+
+  .bird-hero__intro {
+    max-width: calc(100% - 100px);
+  }
+
+  .bird-progress {
+    min-width: 172px;
+  }
+
+  .bird-hero__portraits {
+    right: 12px;
+    bottom: 78px;
+    display: block;
+    padding: 7px;
+    border-radius: 22px;
+  }
+
+  .bird-hero__portraits img {
+    display: none !important;
+    width: 90px;
+    height: 112px;
+    border-radius: 17px;
+  }
+
+  .bird-hero__portraits img:first-child {
+    display: block !important;
+  }
+
+  .bird-game {
+    width: calc(100% - 20px);
+    margin-top: -36px;
+    padding: 22px 14px;
+    border-radius: 22px;
+  }
+
+  .bird-game__heading {
+    align-items: flex-start;
+  }
+
+  .bird-game__heading p {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .bird-status {
+    align-items: flex-start;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .sound-bank,
+  .bird-gallery {
+    padding: 15px;
+    border-radius: 18px;
+  }
+
+  .sound-list {
+    grid-template-columns: 1fr;
+  }
+
+  .bird-grid {
+    gap: 10px;
+  }
+
+  .bird-target__copy {
+    padding: 9px 9px 11px;
+  }
+
+  .bird-target__copy strong {
+    font-size: 0.74rem;
+    white-space: normal;
+  }
+
+  .bird-target__copy em {
+    font-size: 0.58rem;
+    white-space: normal;
+  }
+
+  .bird-target__drop-prompt {
+    right: 6px;
+    bottom: 6px;
+    font-size: 0.52rem;
+  }
+
+  .bird-complete {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .bird-complete button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero__eyebrow {
+    padding: 7px 9px;
+    font-size: 0.68rem;
+  }
+
+  .activity-nav {
+    display: grid;
+    gap: 2px;
+    border-radius: 15px;
+  }
+
+  .activity-nav a {
+    padding: 5px 9px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .bird-hero__intro {
+    max-width: calc(100% - 60px);
+  }
+
+  .bird-hero__portraits {
+    right: -28px;
+  }
+
+  .bird-game__heading {
+    display: block;
+  }
+
+  .bird-game__heading .reset-button {
+    margin-top: 14px;
+  }
+
+  .bird-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bird-target__image {
+    aspect-ratio: 16 / 8.3;
+  }
+}

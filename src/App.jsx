@@ -6,6 +6,8 @@ import flamebackImage from './assets/common-flameback.png'
 import kiteImage from './assets/brahminy-kite.png'
 import simpohImage from './assets/simpoh-air.png'
 import tembusuImage from './assets/tembusu.png'
+import ActivityNav from './ActivityNav.jsx'
+import BirdSounds from './BirdSounds.jsx'
 
 const organisms = [
   {
@@ -77,7 +79,7 @@ function styleFromBox(box) {
   }
 }
 
-function App() {
+function FoodWeb() {
   const [placed, setPlaced] = useState([])
   const [selectedId, setSelectedId] = useState(null)
   const [draggingId, setDraggingId] = useState(null)
@@ -261,7 +263,10 @@ function App() {
   return (
     <main>
       <header className="hero">
-        <div className="hero__eyebrow"><span aria-hidden="true">●</span> Kent Ridge Park</div>
+        <div className="hero__topline">
+          <div className="hero__eyebrow"><span aria-hidden="true">●</span> Kent Ridge Park</div>
+          <ActivityNav current="food-web" />
+        </div>
         <div className="hero__heading">
           <div>
             <p className="hero__kicker">Interactive nature challenge</p>
@@ -449,6 +454,11 @@ function App() {
       </footer>
     </main>
   )
+}
+
+function App() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  return path === '/bird-sounds' ? <BirdSounds /> : <FoodWeb />
 }
 
 export default App
